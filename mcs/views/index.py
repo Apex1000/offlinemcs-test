@@ -170,7 +170,7 @@ def index(request):
             context['countVID'] * 100) / context['countAllFiles']
 
     context['listIMG'] = Files.objects.filter(Type='IMG')
-    print context
+    #print context
     return render(request, 'mcs/index.html', context)
 
 
