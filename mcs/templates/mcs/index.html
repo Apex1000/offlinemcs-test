@@ -335,6 +335,11 @@
             
             iconSize:     [35, 35], // size of the icon          
         });
+        situationalDataTypeColor['Data'] = L.icon({
+            iconUrl:  "{% static "images/minions.png" %}",
+            
+            iconSize:     [35, 35], // size of the icon          
+        });
         situationalDataTypeColor['Shelter'] = L.icon({
             iconUrl: "{% static "images/shelter.png" %}",
             
@@ -342,17 +347,34 @@
            
         });
 
-        map.setView([23.54,87.2965482],8);
+        map.setView([23.54,87.2965482],12);
         
         
-        {% for i,j,fname in  latlong %}
+        {% for i,j,fname,ffname in  latlong %}
+            console.log("{{ffname}}");
             var type = '{{fname}}';
+
             if(type != 'Gis')
             {   
-                var m = L.marker([{{ i }}, {{ j }}],{icon: situationalDataTypeColor['{{fname}}']}).addTo(map);
+                var m = L.marker([{{ i }}, {{ j }}],{icon: situationalDataTypeColor['{{fname}}']}).addTo(map).bindPopup("<center><a href='/filemanager/imageView'><b>Images</b></a><br> <a href='/filemanager/videoView'><b>Video</b></a><br><a href='/filemanager/audioView'><b>Audio</b></a></center>").openPopup();
+                if(type == 'Food')
+                {
+                    var m = L.marker([{{ i }}, {{ j }}],{icon: situationalDataTypeColor['{{fname}}']}).addTo(map).bindPopup("<center><br> <a href='media/sync/{{ffname}}'><b>Images</b></a><br></center>").openPopup();
+                    console.log('hah');
+                }
+                if(type == 'Shelter')
+                {
+                    var m = L.marker([{{ i }}, {{ j }}],{icon: situationalDataTypeColor['{{fname}}']}).addTo(map).bindPopup("<center><br> <a href='media/sync/{{ffname}}'><b>Images</b></a><br></center>").openPopup();
+                    console.log('hah');
+                }
+                if(type == 'Victim')
+                {
+                    var m = L.marker([{{ i }}, {{ j }}],{icon: situationalDataTypeColor['{{fname}}']}).addTo(map).bindPopup("<center><br> <a href='media/sync/{{ffname}}'><b>Images</b></a><br></center>").openPopup();
+                    console.log('hah');
+                }
             }
-        {% endfor %}         
-        
+        {% endfor %}
+
         // Added geojson 
         var geojsonLayer = 0;
         
