@@ -11,7 +11,7 @@ from .utils import manageGis
 
 log = logging.getLogger(__name__)
 
-RELATIVE_PATH_TO_SYNC = "/mnt/c/Users/apex1000/Desktop/alarm/dms/sync/*"
+RELATIVE_PATH_TO_SYNC = "/mnt/d/alarm/dms/sync/*"
 RELATIVE_PATH_TO_GIS = "static/geojson/"
 RELATIVE_PATH_TO_TARGET_GIS = "static/sampleGeoJson/sample.geojson"
 
@@ -143,7 +143,7 @@ def index(request):
 
     print 'No. of Clusters : ' + str(noOfClusters)
     '''
-    context['latlong'] = [(i.lat, i.lon, i.Name.split("_")[2],i.Name)
+    context['latlong'] = [(i.lat, i.lon, i.Name.split("_")[2],i.Name,i.Name.split("_")[0])
                           for i in allFiles]
     sum = 0
     sum1 = 0
